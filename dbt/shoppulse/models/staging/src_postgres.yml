@@ -1,0 +1,25 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    description: "Raw data from Kafka"
+    tables:
+      - name: events
+        description: "Raw events data from Kafka"
+        columns:
+          - name: event_id
+            description: "Unique identifier for the event"
+            tests:
+              - unique
+              - not_null
+          - name: event_type
+            description: "Type of the event"
+          - name: event_ts
+            description: "Timestamp of the event"
+          - name: user_key
+            description: "Unique identifier for the user"
+          - name: product_key
+            description: "Unique identifier for the product"
+          - name: quantity
+            description: "Quantity of the product involved in the event"

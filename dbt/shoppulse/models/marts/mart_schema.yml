@@ -1,0 +1,70 @@
+version: 2
+
+models:
+    - name: fact_events
+      description: "Aggregated events data for analytics"
+      columns:
+        - name: event_id
+          description: "Unique identifier for the event"
+          tests:
+            - unique
+            - not_null
+        - name: user_key
+          description: "Unique identifier for the user"
+        - name: product_key
+          description: "Unique identifier for the product"
+        - name: date_key
+          description: "Date of the event"
+        - name: event_type
+          description: "Type of the event"
+          tests:
+            - accepted_values:
+                values: ['page_view', 'add_to_cart', 'purchase']
+        - name: quantity
+          description: "Quantity of the product involved in the event"
+        - name: amount
+          description: "Total amount for the event"
+        - name: event_ts
+          description: "Timestamp of the event"
+    
+    - name: dim_product
+      description: "Dimension table for products"
+      columns:
+        - name: product_key
+          description: "Unique identifier for the product"
+          tests:
+            - unique
+            - not_null
+        - name: product_name
+          description: "Name of the product"
+        - name: category
+          description: "Category of the product"
+          tests:
+            - accepted_values:
+                values: ['Electronics', 'Apparel', 'Home', 'Toys']
+        - name: price
+          description: "Price of the product"
+
+    - name: dim_date
+      description: "Dimension table for dates"
+      columns:
+        - name: date_key
+          description: "Unique identifier for the date"
+          tests:
+            - unique
+            - not_null
+        - name: event_date
+          description: "Date of the event"
+        - name: year
+          description: "Year of the event"
+        - name: month
+          description: "Month of the event"
+        - name: day
+          description: "Day of the event"
+        - name: day_of_week
+          description: "Day of the week of the event"
+        - name: day_type
+          description: "Type of the day (Weekday/Weekend)"
+          tests:
+            - accepted_values:
+                values: ['Weekday', 'Weekend']

@@ -1,0 +1,27 @@
+name: 'shoppulse'
+version: '1.0.0'
+config-version: 2
+profile: 'shoppulse'
+
+model-paths: ["models"]
+snapshot-paths: ["snapshots"]
+test-paths: ["tests"]
+
+clean-targets:
+  - "target"
+  - "dbt_modules"
+
+models: 
+  shoppulse:
+    staging:
+      +materialized: view
+      +schema: staging
+    marts:
+      +materialized: table
+      +schema: marts
+
+snapshots:
+  shoppulse:
+    +schema: snapshots
+
+  
