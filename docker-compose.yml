@@ -60,6 +60,18 @@ services:
       timeout: 5s
       retries: 5
 
+  event-generator:
+    build:
+      context: ./event-generator
+      dockerfile: Dockerfile
+    container_name: event-generator
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - shoppulse_net
+
+
 networks:
   shoppulse_net:
     driver: bridge
