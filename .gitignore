@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+
+# Java / Spring
+target/
+*.class
+
+# dbt
+dbt/**/target/
+dbt/**/dbt_packages/
+dbt/**/logs/
+
+# Env / secrets
+.env
+*.env
+!.env.example
+
+# Data / logs
+*.log
+data/
+*.csv
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
