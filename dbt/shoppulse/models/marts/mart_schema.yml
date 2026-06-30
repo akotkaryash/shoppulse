@@ -48,13 +48,11 @@ models:
     - name: dim_date
       description: "Dimension table for dates"
       columns:
-        - name: date_key
-          description: "Unique identifier for the date"
+        - name: event_date
+          description: "Unique identifier for the date, Date of the event"
           tests:
             - unique
             - not_null
-        - name: event_date
-          description: "Date of the event"
         - name: year
           description: "Year of the event"
         - name: month

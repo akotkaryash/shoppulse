@@ -60,6 +60,32 @@ services:
       timeout: 5s
       retries: 5
 
+  airflow:
+    build:
+      context: .
+      dockerfile: airflow/Dockerfile.airflow
+    container_name: airflow
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      - AIRFLOW_CONN_POSTGRES_DEFAULT=postgresql://shoppulse:${POSTGRES_PASSWORD}@postgres:5432/shoppulse
+      # Add these two lines so dbt can find them globally in the OS environment:
+      - DBT_HOST=postgres
+      - DBT_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./dbt/shoppulse:/opt/airflow/dbt/shoppulse
+      - ./dbt/profiles.yml:/opt/airflow/dbt/profiles.yml
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - shoppulse_net
+    command: bash -c "airflow db migrate && airflow webserver & airflow scheduler"
+
   event-generator:
     build:
       context: ./event-generator

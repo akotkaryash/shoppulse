@@ -4,9 +4,9 @@ shoppulse:
     dev: 
       type: postgres
       threads: 1
-      host: localhost
+      host: "{{ env_var('DBT_HOST', 'localhost') }}"
       port: 5432
-      user: shoppulse
-      pass: shoppulse_secret
+      user: "{{ env_var('DBT_USERNAME', 'shoppulse') }}"
+      pass: "{{ env_var('DBT_PASSWORD', 'shoppulse_secret') }}"
       dbname: shoppulse
       schema: public
