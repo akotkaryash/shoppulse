@@ -76,7 +76,6 @@ services:
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./dbt/shoppulse:/opt/airflow/dbt/shoppulse
-      - ./dbt/profiles.yml:/opt/airflow/dbt/profiles.yml
     ports:
       - "8080:8080"
     depends_on:
@@ -84,7 +83,7 @@ services:
         condition: service_healthy
     networks:
       - shoppulse_net
-    command: bash -c "airflow db migrate && airflow webserver & airflow scheduler"
+    command: airflow standalone
 
   event-generator:
     build:

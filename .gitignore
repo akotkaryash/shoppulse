@@ -17,6 +17,7 @@ target/
 dbt/**/target/
 dbt/**/dbt_packages/
 dbt/**/logs/
+dbt/shoppulse/.user.yml
 
 # Env / secrets
 .env
