@@ -1,0 +1,9 @@
+FROM node:lts-alpine
+WORKDIR /app
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+# We will map files via volumes, so just ensure dependencies are there
+COPY package*.json ./
+RUN npm install
+# Use --poll to ensure Windows file changes are detected by the container
+CMD ["ng", "serve", "--host", "0.0.0.0", "--poll", "2000"]

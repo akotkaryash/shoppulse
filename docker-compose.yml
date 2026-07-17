@@ -129,6 +129,20 @@ services:
     networks:
       - shoppulse_net
 
+
+  frontend:
+    build:
+      context: ./dashboard
+      dockerfile: ${DOCKERFILE_PATH:-Dockerfile.dev}
+    container_name: shoppulse_frontend
+    ports:
+      - "${HOST_PORT:-4200}:${CONTAINER_PORT:-4200}"
+    volumes:
+      - ./dashboard:/app
+      - /app/node_modules
+    networks:
+      - shoppulse_net
+
 networks:
   shoppulse_net:
     driver: bridge

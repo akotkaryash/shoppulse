@@ -1,0 +1,16 @@
+<div *ngIf="loading" class="spinner">Loading metrics...</div>
+
+<div *ngIf="!loading && metrics" class="dashboard-grid">
+  <div class="card">
+    <h3>Total Events</h3>
+    <p>{{ metrics.totalEvents }}</p>
+  </div>
+  <div class="card">
+    <h3>System Status</h3>
+    <p>{{ metrics.status }}</p>
+  </div>
+</div>
+
+<div *ngIf="!loading && !metrics">
+  <p>No data available. Check API connection.</p>
+</div>
